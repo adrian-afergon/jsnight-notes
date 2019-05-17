@@ -36,3 +36,15 @@ For example we can use it to consume different apis, depending on directives def
 You can use it, for example, for require a specific format for a property ex: date @format('dd-mm-yyyy').
 
 ### Who has implemented directives?
+```
+class AuthDirective extends SchemaDirectiveVisitor
+```
+With apollo client -> We must to override the field visitFieldDefinition. We add logic or fields that we need, and add params that we recieve in args `this.args.requires`.
+
+At the end, we have to return a promise returning an apply `return await resolve.apply(this, args)`.
+
+Always that you query a field that you haven't access, you will get `401`. If you remove this fields from the query, the data are returned by graphql `200`.
+
+##Questions?
+- Can we stack multiple directives?
+We can stack multiple directive. The resolvin order is fron the last to the first.
